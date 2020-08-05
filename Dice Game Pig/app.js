@@ -10,7 +10,7 @@ GAME RULES:
 
 */
 
-var scores, roundScore, activePlayer, gamePlaying;
+var scores, roundScore, activePlayer, gamePlaying, previousDice;
 
 init();
 
@@ -24,14 +24,21 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         diceDOM.style.display = 'block';
         diceDOM.src = 'dice-' + dice + '.png';
 
-        // 3. Update the round score IF the rolled number was NOT a 1
-        if (dice !== 1) {
+        // 3. Update the round score IF the rolled number was NOT a 1.
+        // A player looses his ENTIRE score when he rolls two 6 in a row. After that, it's the next player's turn. 
+        if (dice === 6 && previousDice === 6) {
+            scores[activePlayer] = 0;
+            document.querySelector('#score-' + activePlayer).textContent = 0;
+            nextPlayer();
+        } else if (dice !== 1) {
             // Add score
             roundScore += dice;
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
         } else {
             nextPlayer();
         }
+
+        previousDice = dice;
     }
 });
 
@@ -68,6 +75,9 @@ function nextPlayer() {
     document.querySelector('.player-0-panel').classList.toggle('active');
     document.querySelector('.player-1-panel').classList.toggle('active');
 
+    // Previous dice is set to 0
+    previousDice = 0;
+
     // Dice gets hidden
     document.querySelector('.dice').style.display = 'none';
 }
@@ -78,6 +88,7 @@ function init() {
     scores = [0,0];
     roundScore = 0;
     activePlayer = 0;
+    previousDice = 0;
     gamePlaying = true;
 
     document.querySelector('.dice').style.display = 'none';
