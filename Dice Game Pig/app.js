@@ -31,14 +31,15 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
             document.querySelector('#score-' + activePlayer).textContent = 0;
             nextPlayer();
         } else if (dice !== 1) {
+            // Save dice result
+            previousDice = dice;
+
             // Add score
             roundScore += dice;
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
         } else {
             nextPlayer();
         }
-
-        previousDice = dice;
     }
 });
 
