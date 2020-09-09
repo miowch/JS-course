@@ -7,16 +7,15 @@ GAME RULES:
 - The player can choose to 'Hold', which means that his ROUND score gets added to his GLOBAL score. 
   After that, it's the next player's turn
 - The first player to reach 100 points on GLOBAL score wins the game
-
 */
 
-var scores, roundScore, activePlayer, gamePlaying, previousDice;
+var winningScore, scores, roundScore, activePlayer, gamePlaying, previousDice;
 
 init();
 
 document.querySelector('.btn-roll').addEventListener('click', function() { 
     if (gamePlaying) {
-        // 1. Random namber
+        // 1. Random number
         var dice = Math.floor(Math.random() * 6) + 1;
 
         // 2. Display the result
@@ -25,7 +24,12 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         diceDOM.src = 'dice-' + dice + '.png';
 
         // 3. Update the round score IF the rolled number was NOT a 1.
-        // A player looses his ENTIRE score when he rolls two 6 in a row. After that, it's the next player's turn. 
+        /*
+        Challenge, Part 1
+        A player looses his ENTIRE score when he rolls two 6 in a row. 
+        After that, it's the next player's turn.
+        */
+
         if (dice === 6 && previousDice === 6) {
             scores[activePlayer] = 0;
             document.querySelector('#score-' + activePlayer).textContent = 0;
@@ -50,7 +54,7 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
         document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 
         // Check if player won the game
-        if (scores[activePlayer] >= 100) {
+        if (scores[activePlayer] >= winningScore) {
             document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
             document.querySelector('.dice').style.display = 'none';
             document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
@@ -60,6 +64,26 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
         } else {
             nextPlayer();
         }
+    }
+});
+
+/*
+Challenge, Part 2
+
+Add an input field to the HTML where players can set the winning score, 
+so that they can change the predefined score of 100. 
+(Hint: you can read that value with the .value property in JavaScript. 
+This is a good opportunity to use google to figure this out :)
+*/
+document.querySelector('.winning-score').addEventListener('submit', function(event) {
+    var input = document.querySelector('.winning-score-value');
+
+    // Undefined, 0, null or "" are coerced to false
+    if (input.value) {
+        winningScore = input.value;
+        document.querySelector('.btn-submit').style.display = 'none';
+        input.setAttribute('disabled', true);
+        event.preventDefault();
     }
 });
 
@@ -86,6 +110,7 @@ function nextPlayer() {
 document.querySelector('.btn-new').addEventListener('click', init);
 
 function init() {
+    winningScore = 100;
     scores = [0,0];
     roundScore = 0;
     activePlayer = 0;
@@ -93,6 +118,10 @@ function init() {
     gamePlaying = true;
 
     document.querySelector('.dice').style.display = 'none';
+
+    document.querySelector('.winning-score-value').value = '';
+    document.querySelector('.winning-score-value').removeAttribute('disabled');
+    document.querySelector('.btn-submit').style.display = 'initial';
 
     document.getElementById('score-0').textContent = '0';
     document.getElementById('score-1').textContent = '0';

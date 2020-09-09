@@ -137,7 +137,22 @@ i {
     transition: margin 0.3s;
 }
 
+.winning-score-value {
+    position: absolute;
+    left: 44%;
+    top: 100px;
+    width: 130px;
+    font-family: Lato;
+    font-size: 40px;
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid red;
+    outline: none;
+    background-color: transparent;
+}
+
 .btn-new { top: 45px;}
+.btn-submit { top: 150px;}
 .btn-roll { top: 403px;}
 .btn-hold { top: 467px;}
 
