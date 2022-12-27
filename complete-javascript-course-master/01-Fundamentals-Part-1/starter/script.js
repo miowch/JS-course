@@ -25,7 +25,7 @@ language = 'German';
 // LECTURE: Basic Operators
 
 console.log(population / 2);
-console.log(population += 1);
+// console.log(population += 1);
 
 let populationFinland = 6;
 let populationAverage = 33;
@@ -48,5 +48,53 @@ let heightJohn = 1.76;
 BMIMark = massMark / heightMark ** 2;
 BMIJohn = massJohn / (heightJohn * heightJohn);
 
-let markHigherBMI = BMIMark > BMIJohn;
-console.log(markHigherBMI);
+// LECTURE: Strings and Template Literals
+
+const firstName = 'Jonas';
+const job = 'teacher';
+const birthYear = 1991;
+const year = 2037;
+
+const jonas = "I'm " + firstName + ', a ' + (year - birthYear) + ' years old ' + job + '!';
+console.log(jonas);
+
+const jonasNew = `I'm ${firstName}, a ${year - birthYear} years old ${job}!`;
+console.log(jonasNew);
+
+let descriptionNew = `${country} is in ${continent}, and its ${population} million people speak ${language}`;
+console.log(descriptionNew);
+
+// LECTURE: Taking Decisions: if / else Statements
+
+const age = 19;
+
+if (age >= 18) {
+    console.log(`Sarah can start driving license 🚗`);
+} else {
+    const yearsLeft = 18 - age;
+    console.log(`Sarah is too young. Wait another ${yearsLeft} years :)`);
+}
+
+let century;
+
+if (birthYear <= 2000) {
+    century = 20;
+} else {
+    century = 21;
+}
+console.log(century);
+
+const averagePopulation = 33;
+if (population > averagePopulation) {
+    console.log(`${country}'s population is above average`);
+} else {
+    console.log(`${country}'s population is ${averagePopulation - population} million below average`);
+}
+
+// CODING EXERCISE #2
+
+if (BMIMark > BMIJohn) {
+    console.log(`Mark's BMI (${BMIMark}) is higher than John's (${BMIJohn})!`);
+} else {
+    console.log(`John's BMI (${BMIJohn}) is higher than Mark's (${BMIMark})!`);
+}
