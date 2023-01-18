@@ -30,3 +30,10 @@ if (dolphins_average >= 100 && dolphins_average > koalas_average) {
 } else {
     console.log('No winner!');
 }
+
+// CODING EXERCISE #4
+let bill = 430;
+
+let tip = bill * (((50 <= bill) && (bill <= 300)) ? 0.15 : 0.2);
+
+console.log(`The bill was ${bill}, the tip was ${tip}, and the total value ${bill + tip}`);
