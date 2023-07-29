@@ -55,3 +55,4 @@ if (mark.bmi > john.bmi) {
 } else {
     console.log(`${john.fullName}'s BMI (${john.bmi}) is higher than ${mark.fullName}'s (${mark.bmi})`);
 };
+
